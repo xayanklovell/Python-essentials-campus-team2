@@ -52,11 +52,31 @@ def register_student(students):
 
 
 # Workstream A
-# Enrols a student into a course.
+# Enrols a student into a course, after validating ALL rules.
 def enrol_student(courses, students):
-    pass
+    student_id = input("Student ID: ")
+    if student_id not in students:
+        print("No such student.")
+        return
 
+    course_id = input("Course ID: ")
+    if course_id not in courses:
+        print("No such course.")
+        return
 
+    if len(courses[course_id]["roster"]) >= courses[course_id]["capacity"]:
+        print(course_id, "is full (" + str(len(courses[course_id]["roster"])) + " of " + str(courses[course_id]["capacity"]) + " enrolled). ")
+        return
+
+    if course_id in students[student_id]["enrolments"]:
+        print("Student is already enrolled into this course.")
+        return
+
+    courses[course_id]["roster"].append(student_id)
+    students[student_id]["enrolments"][course_id] = []
+    print(student_id, "enrolled in", course_id + ":", courses[course_id]["name"])
+
+    
 # Workstream B
 # Records a mark for a student.
 def record_mark(courses, students):
