@@ -10,7 +10,16 @@
 # Workstream A
 # Reads and validates a whole number within a given range.
 def read_valid_number(prompt, low, high):
-    pass
+
+    while True:
+        try:
+            number = int(input(prompt))
+            if number < low or number > high:
+                print("Please enter a number between", low, "and", high)
+            else:
+                return number
+        except ValueError:
+            print("Invalid input. Please enter a whole number.")
 
 
 # Workstream A
