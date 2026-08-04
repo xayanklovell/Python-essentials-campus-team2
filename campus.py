@@ -23,9 +23,26 @@ def read_valid_number(prompt, low, high):
 
 
 # Workstream A
-# Adds a new course.
+# Adds a new course with validated input and an empty roster.
 def add_course(courses):
-    pass
+    global next_course_number
+    name = input("Enter course name: ").strip()
+    if name == "":
+        print("Course name cannot be blank.")
+        return
+    capacity = read_valid_number("Enter course capacity: ", 1, 100)
+    pass_mark = read_valid_number("Enter pass mark: ", 0, 100)
+
+    course_id = "C" + str(next_course_number)
+    courses[course_id] = {
+        "name": name,
+        "capacity": capacity,
+        "pass_mark": pass_mark,
+        "roster": []
+    }
+    next_course_number = next_course_number + 1
+    print(f"Added {course_id}: {name} (capacity {capacity}, pass mark {pass_mark})")
+
 
 
 # Workstream B
