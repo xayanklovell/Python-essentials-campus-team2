@@ -103,8 +103,26 @@ def course_report(courses, students):
 
 # Workstream C
 # Searches students and courses.
+# option 7
 def search_everything(courses, students):
-    pass
+  keyword = input("Enter a keyword: ").lower()
+  found_course = False
+  found_student = False
+
+  for student_id, student_info in students.items():
+    if keyword in student_info['name'].lower():
+      found_student = True
+      print(f"Student ID: {student_id}\nStudent Name: {student_info['name']}") 
+  if not found_student:
+    print("No matching students found.")
+
+  for course_id, course_info in courses.items():
+    if keyword in course_info['name'].lower():
+      found_course = True
+      print(f"Course ID: {course_id}\nCourse Name: {course_info['name']}")
+  if not found_course:
+    print("No matching courses found.") 
+
 
 
 # Workstream A
