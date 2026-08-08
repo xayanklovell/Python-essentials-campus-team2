@@ -65,11 +65,11 @@ def enrol_student(courses, students):
         return
 
     if len(courses[course_id]["roster"]) >= courses[course_id]["capacity"]:
-        print(course_id, "is full (" + str(len(courses[course_id]["roster"])) + " of " + str(courses[course_id]["capacity"]) + " enrolled). ")
+        print(course_id, "is full (" + str(len(courses[course_id]["roster"])) + " of " + str(courses[course_id]["capacity"]) + " enrolled).")
         return
 
     if course_id in students[student_id]["enrolments"]:
-        print("Student is already enrolled into this course.")
+        print("Student is already enrolled in this course.")
         return
 
     courses[course_id]["roster"].append(student_id)
@@ -110,7 +110,37 @@ def search_everything(courses, students):
 # Workstream A
 # Withdraws a student from a course.
 def withdraw_student(courses, students):
-    pass
+
+    student_id = input("Student ID: ")
+    if student_id not in students:
+        print("No such student.")
+        return
+
+    student_id = input("Course ID: ")
+    if course_id not in courses:
+        print("No such course.")
+        return
+
+    if course_id not in students[student_id]["enrolments"]:
+        print("Student is not enrolled in course. ")
+        return
+    
+    marks = students[student_id]["enrolments"][course_id]
+
+    confirmation = input(
+        "Withdraw " + student_id + " from " + course_id + ": "
+        + courses[course_id]["name"] + "? Their "
+        + str(len(marks)) + " marks will be deleted. (y/n)"
+    ).lower()
+    if confirmation !="y":
+        print("Withdrawal cancelled.")
+        return
+
+    courses[course_id]["roster"].remove(student_id)
+    del students[student_id]["enrolments"][course_id]
+    print(student_id, "withdrawn from", course_id + ":",
+          courses[course_id]["name"])
+    
 
 
 # Workstream C
